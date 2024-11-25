@@ -49,6 +49,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # my apps
+    "pdf_processor",
+
+    #third party apps
+    "allauth_ui",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # "allauth.socialaccount.providers.github",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -68,9 +79,9 @@ ROOT_URLCONF = 'Home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
-        'OPTIONS': {
+        'OPTIONS': { 
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -192,11 +203,14 @@ STATICFILES_DIRS = [
 #local cdn
 STATIC_ROOT = BASE_DIR.parent / "local-cdn"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR/ "media"
+
 # < Django 4.2
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STORAGES = {
-    "staticfiles": {
+    "staticfiles": { 
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }

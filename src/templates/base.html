@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock title %}</title>
+    {% include 'base/css.html' %}
+    <!-- dropzone js & css  -->
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+</head>
+<body class="bg-gray-900 text-white">
+    {% include 'navbar/nav.html' %}
+    {% block content %}
+
+    {% endblock content %}
+
+    {% include 'base/js.html' %}
+</body>
+</html>
