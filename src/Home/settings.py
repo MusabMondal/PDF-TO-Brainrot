@@ -206,14 +206,17 @@ STATIC_ROOT = BASE_DIR.parent / "local-cdn"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR/ "media"
 
+# For file uploads
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 # < Django 4.2
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STORAGES = {
-    "staticfiles": { 
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# STORAGES = {
+#     "staticfiles": { 
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
