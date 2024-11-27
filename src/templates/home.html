@@ -14,18 +14,26 @@
       <div class="flex flex-col lg:flex-row w-3/4 h-[calc(100vh-6rem)] space-y-4 lg:space-x-4 lg:space-y-0">
 
         <!-- Drag and Drop Zone (Custom height for mobile and large screens) -->
-        <div class="flex flex-col items-center justify-between w-full lg:w-1/2 h-[300px] lg:h-[400px] border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700">
+        <div class="flex flex-col items-center justify-between w-full lg:w-1/2 h-[300px] lg:h-[400px] ">
           
           <!-- Drag and Drop Area (Adjusted height) -->
-          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-[200px] lg:h-[300px] pt-5 pb-6">
-              <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-              </svg>
-              <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-              <p class="text-xs text-gray-400">PDF only</p>
-          </label>
-          
-          <input id="dropzone-file" type="file" class="hidden" />
+          <form action="{% url 'file_upload' %}" method="POST" class="dropzone flex flex-col items-center justify-center w-full h-full pt-5 pb-6 bg-transparent border-0 hover:bg-gray-700 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-800" id="my-awesome-dropzone">
+            {% csrf_token %}
+            <!-- Centered content with margin-top to move it down -->
+            <div class="flex flex-col items-center justify-center text-center mt-6"> <!-- Added margin-top to move content down -->
+                <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-6 text-sm text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-400">PDF only</p>
+            </div>
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        </form>
+        
+        
+        
           
           <!-- Generate Button (positioned at the bottom-left) -->
           <button class="mt-4 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
@@ -61,6 +69,26 @@
     </div>
     <p class="text-sm text-[gray]">Loved by 150,000+ students</p>
   </div> -->
+
+  <script>
+    Dropzone.autoDiscover = false;
+
+    var myDropzone = new Dropzone("#my-awesome-dropzone", {
+        url: "{% url 'file_upload' %}",
+        maxFiles: 1,
+        maxFilesize: 50,
+        acceptedFiles: '.pdf',
+        dictDefaultMessage: "",
+        init: function() {
+          this.on("addedfile", function(){
+            const messageDiv = document.querySelector('.dz-message');
+            if (messageDiv){
+              messageDiv.style.display = 'none';
+            }
+          });
+        }
+    });
+</script>
   
 
 
